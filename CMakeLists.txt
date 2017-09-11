@@ -53,7 +53,7 @@ enable_testing()
 
 # Add our CMake helper functions
 include(cmake/KenLMFunctions.cmake)
-
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
 if(MSVC)
   set(CMAKE_C_FLAGS "${CMAKE_CXX_FLAGS} /w34716")
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /w34716")

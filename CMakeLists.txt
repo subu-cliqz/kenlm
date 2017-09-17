@@ -80,3 +80,6 @@ include_directories(
 add_subdirectory(util)
 add_subdirectory(lm)
 
+add_library(kenlmrust SHARED c_api/load.cpp)
+target_link_libraries(kenlmrust kenlm)
+

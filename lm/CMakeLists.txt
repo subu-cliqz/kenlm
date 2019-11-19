@@ -34,7 +34,7 @@ if (NOT MSVC)
 	set(THREADS pthread)
 endif()
 
-add_library(kenlm ${KENLM_LM_SOURCE} ${KENLM_LM_COMMON_SOURCE})
+add_library(kenlm SHARED ${KENLM_LM_SOURCE} ${KENLM_LM_COMMON_SOURCE})
 target_link_libraries(kenlm kenlm_util ${Boost_LIBRARIES} ${THREADS})
 
 set(KENLM_MAX_ORDER 6 CACHE STRING "Maximum supported ngram order")

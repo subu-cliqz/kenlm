@@ -3,6 +3,17 @@ cmake_minimum_required(VERSION 2.6)
 # Define a single cmake project
 project(kenlm)
 
+macro(use_cxx11)
+  if (CMAKE_VERSION VERSION_LESS "3.1")
+    if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+      set (CMAKE_CXX_FLAGS "-std=gnu++11 ${CMAKE_CXX_FLAGS}")
+    endif ()
+  else ()
+    set (CMAKE_CXX_STANDARD 11)
+  endif ()
+endmacro(use_cxx11)
+
+use_cxx11()
 option(FORCE_STATIC "Build static executables" OFF)
 if (FORCE_STATIC)
   #presumably overkill, is there a better way?
@@ -53,7 +64,7 @@ enable_testing()
 
 # Add our CMake helper functions
 include(cmake/KenLMFunctions.cmake)
-
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
 if(MSVC)
   set(CMAKE_C_FLAGS "${CMAKE_CXX_FLAGS} /w34716")
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /w34716")
@@ -79,4 +90,7 @@ include_directories(
 # Process subdirectories
 add_subdirectory(util)
 add_subdirectory(lm)
+
+add_library(kenlmrust SHARED c_api/load.cpp)
+target_link_libraries(kenlmrust kenlm)
 

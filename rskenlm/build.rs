@@ -20,7 +20,7 @@ fn main() {
         .clang_arg("-I../")
         .clang_arg("-x").clang_arg("c++")
         .clang_arg("-std=c++11")
-        .clang_arg("-DKENLM_MAX_ORDER=6")
+        .clang_arg("-DKENLM_MAX_ORDER=10")
         .enable_cxx_namespaces()
         .layout_tests(true)
         // Finish the builder and generate the bindings.
